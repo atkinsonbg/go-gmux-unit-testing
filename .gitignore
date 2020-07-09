@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/go,intellij+all,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,intellij+all,macos
 
+go-gmux-proper-unit-testing-api
+
 ### Go ###
 # Binaries for programs and plugins
 *.exe

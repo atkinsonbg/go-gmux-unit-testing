@@ -6,8 +6,9 @@ services:
     container_name: go-mux-api
     image: github.com/atkinsonbg/go-gmux-proper-unit-testing/api:latest
     environment:
-      CONNECTION_STRING: host=go-mux-db dbname=go-mux-db user=postgres
-      DATABASE_URL: postgresql://postgres@go-mux-db:5432/go-mux-db
+      DBHOST: go-mux-db
+      DBNAME: go-mux-db
+      DBUSER: postgres
     ports:
       - 80:80
 

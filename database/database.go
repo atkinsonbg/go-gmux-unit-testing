@@ -3,19 +3,25 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	backoff "github.com/cenkalti/backoff/v4"
+	"github.com/kelseyhightower/envconfig"
 	_ "github.com/lib/pq"
 	"log"
-	backoff "github.com/cenkalti/backoff/v4"
-	"os"
 )
 
 var db *sql.DB
 
+type Config struct {
+	User        string `envconfig:"DBUSER"`
+	Name        string `envconfig:"DBNAME"`
+	Host     	string `envconfig:"DBHOST"`
+}
+
 func InitDB() {
-	config := dbConfig()
+	c := dbConfig()
 	psqlInfo := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable",
-		config["dbhost"], config["dbuser"], config["dbname"])
-	log.Println(psqlInfo)
+		c.Host, c.User, c.Name)
+
 	var err error
 	db, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
@@ -38,20 +44,11 @@ var pingDb backoff.Operation = func() error {
 	return nil
 }
 
-func dbConfig() map[string]string {
-	conf := make(map[string]string)
-	ok := false
-	conf["dbhost"], ok = os.LookupEnv("DBHOST")
-	if !ok {
-		panic("DBHOST environment variable required but not set")
+func dbConfig() Config {
+	var c Config
+	err := envconfig.Process("myapp", &c)
+	if err != nil {
+		log.Panic(err)
 	}
-	conf["dbname"], ok = os.LookupEnv("DBNAME")
-	if !ok {
-		panic("DBNAME environment variable required but not set")
-	}
-	conf["dbuser"], ok = os.LookupEnv("DBUSER")
-	if !ok {
-		panic("DBUSER environment variable required but not set")
-	}
-	return conf
+	return c
 }

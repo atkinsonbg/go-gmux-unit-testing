@@ -2,7 +2,6 @@ version: "3.7"
 
 services:
   api:
-    build: .
     container_name: go-mux-api
     image: github.com/atkinsonbg/go-gmux-proper-unit-testing/api:latest
     environment:

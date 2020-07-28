@@ -2,7 +2,6 @@ run:
 	go run github.com/atkinsonbg/go-gmux-proper-unit-testing
 
 up:
-	GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o go-gmux-proper-unit-testing-api
 	docker-compose down
 	COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up --build --detach
 	docker-compose logs -f
@@ -10,3 +9,9 @@ up:
 down:
 	rm -rf go-gmux-proper-unit-testing-api
 	docker-compose down
+
+docker:
+	docker build -t github.com/atkinsonbg/go-gmux-proper-unit-testing/api:latest .
+
+dockerrun:
+	docker run -it github.com/atkinsonbg/go-gmux-proper-unit-testing/api:latest

@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func GetAll() {
+func GetAllTimezones() {
 	var (
 		id int
 		created string

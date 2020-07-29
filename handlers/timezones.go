@@ -8,5 +8,5 @@ import (
 
 func TimezonesHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	database.GetAll()
+	database.GetAllTimezones()
 }

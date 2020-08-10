@@ -20,3 +20,11 @@ services:
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
+
+  dozzle:
+    container_name: go-mux-dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8888:8080

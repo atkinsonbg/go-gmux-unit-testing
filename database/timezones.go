@@ -11,6 +11,7 @@ func GetAllTimezones() {
 		created string
 		modified string
 		name string
+		offset int
 		identifier string
 	)
 
@@ -22,10 +23,10 @@ func GetAllTimezones() {
 
 	defer rows.Close()
 	for rows.Next() {
-		err := rows.Scan(&id, &created, &modified, &name, &identifier)
+		err := rows.Scan(&id, &created, &modified, &name, &offset, &identifier)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(id, name, identifier)
+		fmt.Println(id, name, offset, identifier)
 	}
 }

@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/atkinsonbg/go-gmux-proper-unit-testing/handlers"
-	"github.com/atkinsonbg/go-gmux-proper-unit-testing/database"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+
+	"github.com/atkinsonbg/go-gmux-proper-unit-testing/database"
+	"github.com/atkinsonbg/go-gmux-proper-unit-testing/handlers"
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -13,6 +14,8 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", handlers.HomeHandler).Methods("GET")
 	r.HandleFunc("/healthcheck", handlers.HealthHandler).Methods("GET")
-	r.HandleFunc("/timezones", handlers.TimezonesHandler).Methods("GET")
+	r.HandleFunc("/timezones", handlers.ListTimezonesHandler).Methods("GET")
+	r.HandleFunc("/timezones/{identifier}", handlers.GetTimezoneHandler).Methods("GET")
+	r.HandleFunc("/timezones", handlers.InsertTimezoneHandler).Methods("POST")
 	log.Fatal(http.ListenAndServe(":80", r))
 }

@@ -15,3 +15,9 @@ docker:
 
 dockerrun:
 	docker run -it github.com/atkinsonbg/go-gmux-proper-unit-testing/api:latest
+
+dockertest:
+	docker build -f Dockerfile.test -t github.com/atkinsonbg/go-gmux-proper-unit-testing/tests:latest .
+
+dockertestrun:
+	docker run -it github.com/atkinsonbg/go-gmux-proper-unit-testing/tests:latest

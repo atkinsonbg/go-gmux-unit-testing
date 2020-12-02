@@ -1,0 +1,26 @@
+FROM postgres:11.6-alpine
+RUN apk add --no-cache git make musl-dev go busybox-suid
+
+# Set environment variables for the database
+ENV POSTGRESUSER postgres
+ENV DBUSER postgres
+ENV DBNAME go-mux-db
+ENV DBHOST localhost
+
+# Configure Go
+ENV GOROOT /usr/lib/go
+ENV GOPATH /go
+ENV PATH /go/bin:$PATH
+RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
+
+# Give postgres user full access to Go path, needed to install dependencies
+RUN chown -R postgres /go
+
+# Create a workdir, this is needed to properly install Go dependencies
+# chown on the postgres user so it can clone the repo here
+WORKDIR testdir
+RUN chown -R postgres /testdir
+
+# chmod the entrypoint db script
+RUN echo -e "#!/bin/bash \n set -e \n git clone \${GIT_URL} ../testdir \n ls ../testdir/ \n /bin/sh ../testdir/scripts/commands.sh" >> /docker-entrypoint-initdb.d/entrypoint.sh
+RUN chmod +x /docker-entrypoint-initdb.d/entrypoint.sh

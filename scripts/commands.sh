@@ -2,7 +2,7 @@
 set -e
 
 echo "Setting up the Postgres user"
-POSTGRES="psql --username ${POSTGRES_USER}"
+POSTGRES="psql --username ${POSTGRESUSER}"
 
 echo "Creating database: ${DBNAME}"
 $POSTGRES <<EOSQL

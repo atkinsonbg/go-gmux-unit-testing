@@ -22,5 +22,5 @@ WORKDIR testdir
 RUN chown -R postgres /testdir
 
 # chmod the entrypoint db script
-RUN echo -e "#!/bin/bash \n set -e \n git clone \${GIT_URL} ../testdir \n /bin/sh ../testdir/scripts/docker-test-commands.sh >/dev/null & \nwait\nexit 0" >> /docker-entrypoint-initdb.d/entrypoint.sh
+RUN echo -e "#!/bin/bash \n set -e \n git clone \${GIT_URL} ../testdir \n /bin/sh ../testdir/scripts/docker-test-commands.sh >/dev/null 0>&1 2>&1 & \nwait\nexit 0" >> /docker-entrypoint-initdb.d/entrypoint.sh
 RUN chmod +x /docker-entrypoint-initdb.d/entrypoint.sh

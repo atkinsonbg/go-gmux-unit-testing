@@ -21,9 +21,10 @@ RUN chown -R postgres /go
 WORKDIR testdir
 RUN chown -R postgres /testdir
 
+# used for local testing ONLY
 COPY . .
 
-# chmod the entrypoint db script
+# create the entrypoint db script
 RUN echo -e "\
     #!/bin/bash \n \
     set -e \n \
@@ -32,8 +33,6 @@ RUN echo -e "\
     COMMANDS_PID=\$! \n \
     (while kill -0 \$COMMANDS_PID; do sleep 1; done) && pg_ctl stop & \
     " >> /docker-entrypoint-initdb.d/entrypoint.sh
+
+# chmod the entrypoint db script
 RUN chmod +x /docker-entrypoint-initdb.d/entrypoint.sh
-
-
-# echo \$COMMANDS_PID \n \
-# echo \"DONE123\" \

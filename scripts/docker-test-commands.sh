@@ -2,9 +2,9 @@
 set -e
 
 echo "Wait for Postgres to start"
-until pg_isready -h localhost -p 5432 -U postgres
+until pg_isready -h ${DBHOST} -p 5432 -U ${POSTGRESUSER}
 do
-  echo "Waiting for postgres at: $pg_uri"
+  echo "Waiting for postgres to start at localhost..."
   sleep 2;
 done
 echo "Postgres has started"
@@ -17,12 +17,11 @@ $POSTGRES <<EOSQL
 CREATE DATABASE "${DBNAME}" OWNER ${POSTGRESUSER};
 EOSQL
 
-echo "Creating schema..."
+echo "Initializing database..."
 psql -d ${DBNAME} -a -U${POSTGRESUSER} -f ./scripts/init.sql &
 SQL_PID=$!
 wait $SQL_PID
-
-echo "Finished with creatin schema"
+echo "Finished initializing database"
 
 echo "Running Go Tests"
 go test -v ./... &

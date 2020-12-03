@@ -2,6 +2,3 @@ go-mux-proper-unit-testing-api
 Makefile
 README.md
 docker-compose.yml
-
-# ignore all SQL files
-#**/*.sql

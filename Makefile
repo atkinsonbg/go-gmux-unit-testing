@@ -21,3 +21,5 @@ dockertest:
 
 dockertestrun:
 	docker run -it github.com/atkinsonbg/go-gmux-proper-unit-testing/tests:latest
+
+# docker run -it -e GIT_URL='https://github.com/atkinsonbg/go-gmux-unit-testing.git' github.com/atkinsonbg/go-gmux-proper-unit-testing/tests:latest

@@ -15,4 +15,4 @@ psql -d ${DBNAME} -a -U${POSTGRESUSER} -f ./scripts/init.sql
 echo "Running Go Tests"
 go test -v ./... &
 
-exit 0
+ps -aux | less

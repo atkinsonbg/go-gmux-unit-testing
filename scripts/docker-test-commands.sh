@@ -12,7 +12,7 @@ EOSQL
 echo "Creating schema..."
 psql -d ${DBNAME} -a -U${POSTGRESUSER} -f ./scripts/init.sql
 
-echo "Running Go Tests"
-go test -v ./... &
+# echo "Running Go Tests"
+# go test -v ./... &
 
 ps -aux | less

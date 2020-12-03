@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+echo "Printing environment variables:"
+echo ${DBUSER}
+echo ${DBNAME}
+echo "Done printing environment variables:"
+
+
 echo "Wait for Postgres to start"
 until pg_isready -h ${DBHOST} -p 5432 -U ${POSTGRESUSER}
 do

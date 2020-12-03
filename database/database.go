@@ -3,20 +3,23 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
+
 	backoff "github.com/cenkalti/backoff/v4"
 	"github.com/kelseyhightower/envconfig"
 	_ "github.com/lib/pq"
-	"log"
 )
 
 var db *sql.DB
 
+// Config is a struct that pulls in env vars to configure the database
 type Config struct {
-	User        string `envconfig:"DBUSER"`
-	Name        string `envconfig:"DBNAME"`
-	Host     	string `envconfig:"DBHOST"`
+	User string `envconfig:"DBUSER"`
+	Name string `envconfig:"DBNAME"`
+	Host string `envconfig:"DBHOST"`
 }
 
+// InitDB connects to the database
 func InitDB() {
 	c := dbConfig()
 	psqlInfo := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable",

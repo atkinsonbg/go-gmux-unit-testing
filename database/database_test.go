@@ -4,6 +4,9 @@ import (
 	"testing"
 )
 
-func TestYourFunc(t *testing.T) {
-	// Test code
+func TestConfig(t *testing.T) {
+	config := dbConfig()
+	if config.Host != "localhost" {
+		t.Error("DB config did not work.")
+	}
 }

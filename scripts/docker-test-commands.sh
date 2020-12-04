@@ -8,7 +8,6 @@ echo "DB HOST: ${DBHOST}"
 echo "POSTGRES USER: ${POSTGRESUSER}"
 echo "Done printing environment variables:"
 
-
 echo "Wait for Postgres to start"
 until pg_isready -h ${DBHOST} -p 5432 -U ${POSTGRESUSER}
 do
@@ -32,7 +31,7 @@ wait $SQL_PID
 echo "Finished initializing database"
 
 echo "Running Go Tests"
-go test -v ./... &
+go test -v ./... -coverpkg ./... -coverprofile cover.out &
 GO_PID=$!
 wait $GO_PID
 echo "Finished with go tests"

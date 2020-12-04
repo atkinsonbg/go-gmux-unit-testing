@@ -11,7 +11,7 @@ echo "Done printing environment variables:"
 echo "Wait for Postgres to start"
 until pg_isready -h ${DBHOST} -p 5432 -U ${POSTGRESUSER}
 do
-  echo "Waiting for postgres to start at localhost..."
+  echo "Waiting for postgres to start at ${DBHOST}..."
   sleep 2;
 done
 echo "Postgres has started"

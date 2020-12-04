@@ -20,6 +20,7 @@ RUN chown -R postgres /go
 # chown on the postgres user so it can clone the repo here
 WORKDIR testdir
 RUN chown -R postgres /testdir
+RUN mkdir /tmpdir
 
 # used for local testing ONLY
 # COPY . .
@@ -28,7 +29,8 @@ RUN chown -R postgres /testdir
 RUN echo -e "\
     #!/bin/bash \n \
     set -e \n \
-    git clone \${GIT_URL} ../testdir \n \
+    git clone \${GIT_URL} ../testdir/tmpdir/ \n \
+    cp -R ../testdir/tmpdir/* ../testdir/ \n \
     /bin/sh ../testdir/scripts/docker-test-commands.sh & \n \
     COMMANDS_PID=\$! \n \
     (while kill -0 \$COMMANDS_PID; do sleep 1; done) && pg_ctl stop & \

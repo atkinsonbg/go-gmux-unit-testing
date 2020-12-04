@@ -22,7 +22,7 @@ WORKDIR testdir
 RUN chown -R postgres /testdir
 
 # used for local testing ONLY
-COPY . .
+# COPY . .
 
 # create the entrypoint db script
 RUN echo -e "\

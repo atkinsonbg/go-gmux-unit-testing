@@ -2,8 +2,10 @@
 set -e
 
 echo "Printing environment variables:"
-echo ${DBUSER}
-echo ${DBNAME}
+echo "DB USER: ${DBUSER}"
+echo "DB NAME: ${DBNAME}"
+echo "DB HOST: ${DBHOST}"
+echo "POSTGRES USER: ${POSTGRESUSER}"
 echo "Done printing environment variables:"
 
 

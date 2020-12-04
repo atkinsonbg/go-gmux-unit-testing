@@ -12,7 +12,6 @@ import (
 func main() {
 	database.InitDB()
 	r := mux.NewRouter()
-	r.HandleFunc("/", handlers.HomeHandler).Methods("GET")
 	r.HandleFunc("/healthcheck", handlers.HealthHandler).Methods("GET")
 	r.HandleFunc("/timezones", handlers.ListTimezonesHandler).Methods("GET")
 	r.HandleFunc("/timezones/{identifier}", handlers.GetTimezoneHandler).Methods("GET")

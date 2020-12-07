@@ -28,7 +28,6 @@ RUN mkdir /tmpdir
 # create the entrypoint db script
 RUN echo -e "\
     #!/bin/bash \n \
-    set -e \n \
     git clone \${GIT_URL} ../testdir/tmpdir/ \n \
     cp -R ../testdir/tmpdir/* ../testdir/ \n \
     /bin/sh ../testdir/scripts/docker-test-commands.sh & \n \
